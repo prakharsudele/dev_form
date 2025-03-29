@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Registration</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 400px;
+        animation: fadeIn 1s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      h1 {
+        color: #0072ff;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      button {
+        background: #0072ff;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background: #005bb5;
+      }
+      #checkInOutButton {
+        background: #ff4d4d;
+      }
+      #checkInOutButton:hover {
+        background: #cc0000;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        background: #f4f4f4;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Finding the Correct Balance</h1>
+      <p>Join our session on learning vs. earning</p>
+
+      <form id="registrationForm">
+        <input type="text" id="name" placeholder="Enter your name" required />
+        <input
+          type="text"
+          id="rollNo"
+          placeholder="Enter your roll number"
+          required
+        />
+        <select id="branch" required>
+          <option value="">Select Branch</option>
+          <option value="CSE">CSE</option>
+          <option value="IT">IT</option>
+          <option value="EX">EX</option>
+          <option value="EC">EC</option>
+          <option value="MECH">MECH</option>
+          <option value="CIVIL">CIVIL</option>
+          <option value="AUTOMOBILE">AUTOMOBILE</option>
+        </select>
+        <select id="semester" required>
+          <option value="">Select Semester</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+        <input
+          type="tel"
+          id="phone"
+          placeholder="Enter your phone number"
+          required
+        />
+        <button type="submit" id="registerButton">Register</button>
+      </form>
+
+      <button id="checkInOutButton">Check In</button>
+
+      <div id="checkedInList">
+        <h2>Checked-in Participants</h2>
+        <ul id="participantsList"></ul>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const name = document.getElementById("name").value;
+          const rollNo = document.getElementById("rollNo").value;
+          const branch = document.getElementById("branch").value;
+          const semester = document.getElementById("semester").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+
+          const participantList = document.getElementById("participantsList");
+          const listItem = document.createElement("li");
+          listItem.textContent = `${name} - ${rollNo} (${branch}, Sem ${semester})`;
+          participantList.appendChild(listItem);
+
+          document.getElementById("registrationForm").reset();
+
+          const registerButton = document.getElementById("registerButton");
+          registerButton.style.backgroundColor = "#28a745";
+          setTimeout(() => {
+            registerButton.style.backgroundColor = "#0072ff";
+          }, 500);
+        });
+
+      document
+        .getElementById("checkInOutButton")
+        .addEventListener("click", function () {
+          if (this.textContent === "Check In") {
+            this.textContent = "Check Out";
+            this.style.backgroundColor = "#cc0000";
+          } else {
+            this.textContent = "Check In";
+            this.style.backgroundColor = "#ff4d4d";
+          }
+        });
+    </script>
+  </body>
+</html>
